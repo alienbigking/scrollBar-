@@ -35,7 +35,7 @@
         overflow: hidden;
       }
       #content {
-        width: 320px;
+        /*width: 320px;*/
 
         font-size: 18px;
         position: absolute;
@@ -88,13 +88,14 @@
       /*横向滚动条*/
       #horizontalScrollBar {
           height: 7px;
-          width: max-content;
+          width: 320px;
           position: absolute;
           left: 0;
           bottom: 0;
       }
       #horizontalScrollBar:hover {
           height: 11px;
+          width: 320px;
           position: absolute;
           left: 0;
           bottom: 0;
@@ -116,7 +117,7 @@
           position: absolute;
           bottom: 3px;
           cursor: pointer;
-          transition-property: width, opacity;
+          transition-property: height, opacity;
           transition-duration: 0.3s;
           transition-timing-function: ease;
           transition-delay: 0.1s;
@@ -161,6 +162,7 @@
       <div id="scrollBar">
         <p id="rollingBuoy"></p>
       </div>
+      <!--横向滚动条-->
       <div id="horizontalScrollBar">
         <p id="horizontalRollingBuoy"></p>
       </div>
@@ -172,18 +174,22 @@
       let scrollBar = document.getElementById("scrollBar");
       let rollingBuoy = document.getElementById("rollingBuoy");
 
+      /*横向滚动条*/
+      let horizontalScrollBar = document.getElementById("horizontalScrollBar");
+      let horizontalRollingBuoy = document.getElementById("horizontalRollingBuoy");
+
       let rollingBuoyHeight = 0; //滚动条高度
       let sizeRollingDistance = 20; // 控制滚轮一次滚动的内容距离
+
+      /*---横向滚动条*/
+      let horizontalRollingBuoyWidth = 0// 横向滚动条宽度
+
 
       window.onload = function () {
         // 内容的可视区域 / 实际内容区域 = 滚动条浮标的高度 / 滚动条所能游动的区域
         // clientHeight / scrollHeight = h / clientHeight // h表示滚动浮标的高度
 
-        // console.log('content.clientHeight',content.clientHeight)
-        // console.log('content.scrollHeight',content.scrollHeight)
-        // console.log('scrollBar.clientHeight',scrollBar.clientHeight)
-
-        // 滚动浮标的高度
+        // 滚动条的高度
         rollingBuoyHeight =
           (scrollContainer.clientHeight * scrollBar.clientHeight) /
           scrollContainer.scrollHeight;
@@ -192,8 +198,8 @@
         // 实际内容区域可移动距离 / 实际内容区域 = 滚动条浮标可移动距离 / 滚动条所能游动的区域
         // scrollTop / scrollHeight = top / clientHeight // top表示滚动浮标的移动距离
 
-        console.log("content.scrollTop", content.scrollTop);
-        console.log("scrollBar.clientHeight", scrollBar.clientHeight);
+        // console.log("content.scrollTop", content.scrollTop);
+        // console.log("scrollBar.clientHeight", scrollBar.clientHeight);
         console.log(
           "scrollContainer.scrollHeight",
           scrollContainer.scrollHeight
@@ -203,6 +209,28 @@
           (scrollContainer.scrollTop * scrollBar.clientHeight) /
           scrollContainer.scrollHeight;
         console.log("滚动浮标能滚动的距离", rollingBuoyDisplacementDistance);
+
+
+        /*start---横向滚动条*/
+        // 内容的可视区域 / 实际内容区域 = 滚动条浮标的宽度 / 滚动条所能游动的宽度
+
+        // 横向滚动条的宽度度
+        horizontalRollingBuoyWidth =
+                (scrollContainer.clientWidth * scrollBar.clientWidth) /
+                scrollContainer.scrollWidth;
+        horizontalRollingBuoy.style.width = rollingBuoyHeight + "px";
+        console.log(
+                "scrollContainer.scrollWidth",
+                scrollContainer.scrollWidth
+        );
+
+        const horizontalRollingBuoyDisplacementDistance =
+                (scrollContainer.scrollTop * scrollBar.clientHeight) /
+                scrollContainer.scrollHeight;
+
+        console.log("滚动浮标能滚动的距离", rollingBuoyDisplacementDistance);
+
+        /*ent---横向滚动条*/
       };
 
       //鼠标点击拖动部分
@@ -332,6 +360,70 @@
           rollingBuoy.style.top = -top + "px";
         }
       };
+
+      /*start----横向滚动条*/
+        //鼠标点击拖动部分
+         horizontalRollingBuoy.onmousedown = function (ev) {
+        console.log("横向---鼠标点击位置信息", ev);
+        let e = ev || window.event;
+        if (e.preventDefault) {
+          e.preventDefault();
+        } else {
+          e.returnValue = false;
+        }
+
+        //鼠标点击位置距离拖动组件顶部的距离
+        let d_bkt = e.offsetX;
+        console.log("快速点击", e.offsetY);
+        console.log("horizontalScrollBar.offsetLeft-----", horizontalScrollBar.offsetLeft);
+        // 获取滚动容器左边距离文档左边的距离
+        let distanceFromTopDocument = e.clientX - d_bkt - horizontalRollingBuoy.offsetLeft;
+
+        //鼠标拖动函数
+        document.onmousemove = function (ev) {
+          let e = ev || window.event;
+          console.log("横向----快速点击----e.clientX", e.clientX);
+          console.log(
+                  "横向----快速点击----distanceFromTopDocument",
+                  distanceFromTopDocument
+          );
+          console.log("横向----快速点击----d_bkt", d_bkt);
+
+          let left = e.clientX - distanceFromTopDocument - d_bkt; // 已滚动距离 如果容器距离HTML元素顶部距离大于0 则要减去这部分距离
+          // console.log('clientY高度',e.clientY)
+          // console.log('距离滚动元素顶部距离',d_bkt)
+          console.log("横向----快速点击----已滚动的left值", left);
+
+          if (left <= 0) {
+            // 未滚动
+            left = 0;
+            console.log("left值小于等于0");
+          } else if (left >= horizontalScrollBar.clientWidth - horizontalRollingBuoy.clientWidth) {
+            // 达到最大滚动距离时
+            left = horizontalScrollBar.clientWidth - horizontalRollingBuoy.clientWidth; // 获取到最大可滚动的高度
+            console.log("已达到最大滚动距离", left);
+          }
+
+          //根据已滚动的距离和剩余可滚动的距离 计算滚动比例
+          let scale = left / (horizontalScrollBar.clientWidth - horizontalRollingBuoy.clientWidth);
+
+          console.log("拖动的缩放", scale);
+          //滚动区域的滚动距离  计算公式// 实际内容区域应移动距离（x 需要计算出来） / 实际内容区域可滚动高度(content.clientHeight - scrollContainer.clientHeight) = 滚动条已滚动距离（top） / 滚动条可滚动的高度(scrollBar.clientHeight - rollingBuoy.clientHeight)
+
+          let cony =
+                  scale * (content.clientWidth - scrollContainer.clientWidth);
+          console.log("应滚动距离", cony);
+          horizontalRollingBuoy.style.left = left + "px"; // 设置滚动条自身滚动距离
+          content.style.left = -cony + "px"; // 设置内容的滚动距离
+
+          console.log(left);
+        };
+
+        document.onmouseup = function () {
+          document.onmousemove = null;
+        };
+      };
+      /*end----横向滚动条*/
 
       //以下为鼠标滚轮事件
       // let str = window.navigator.userAgent.toLowerCase();
