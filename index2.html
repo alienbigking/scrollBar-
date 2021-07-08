@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>标题</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      body {
+        /*height: 2000px;*/
+      }
+      .box1 {
+        width: 320px;
+        height: 400px;
+        background: #ccc;
+        overflow: hidden;
+        overflow-y: scroll;
+        margin: 0 0 0 100px;
+      }
+      .con1 {
+        font-size: 18px;
+      }
+      #scrollContainer {
+        width: 320px;
+        height: 400px;
+        background: greenyellow 0 0 repeat-x;
+        position: absolute;
+        left: 500px;
+        top: 20px;
+        overflow: hidden;
+      }
+      #content {
+        width: 320px;
+
+        font-size: 18px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+
+      }
+      #content p {
+          width: 800px;
+      }
+      #scrollBar {
+        width: 7px;
+        height: 400px;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      #scrollBar:hover {
+        width: 11px;
+        height: 400px;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      #rollingBuoy {
+        width: 7px;
+        border-radius: 4px;
+        opacity: 0.4;
+        background: #888888;
+        position: absolute;
+        right: 3px;
+        cursor: pointer;
+      }
+      #rollingBuoy:hover {
+        width: 11px;
+        height: 120px;
+        opacity: 0.9;
+        background: #888888;
+        border-radius: 6px;
+        position: absolute;
+        right: 3px;
+        cursor: pointer;
+        transition-property: width, opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: ease;
+        transition-delay: 0.1s;
+      }
+
+      /*横向滚动条*/
+      #horizontalScrollBar {
+          height: 7px;
+          width: max-content;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+      }
+      #horizontalScrollBar:hover {
+          height: 11px;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+      }
+      #horizontalRollingBuoy{
+          height: 7px;
+          border-radius: 4px;
+          opacity: 0.4;
+          background: #888888;
+          position: absolute;
+          bottom: 3px;
+          cursor: pointer;
+      }
+      #horizontalRollingBuoy:hover {
+          height: 11px;
+          opacity: 0.9;
+          background: #888888;
+          border-radius: 6px;
+          position: absolute;
+          bottom: 3px;
+          cursor: pointer;
+          transition-property: width, opacity;
+          transition-duration: 0.3s;
+          transition-timing-function: ease;
+          transition-delay: 0.1s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box1">
+      <p class="con1">
+        滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条
+      </p>
+    </div>
+
+    <div id="scrollContainer">
+      <div id="content">
+        <p>
+          start
+          滚动条滚动条滚动条滚动条1滚动条滚动条滚动条滚动条滚动条滚2动条滚动条滚动条滚动条滚动条滚动3条滚动条滚动条滚动条滚动条滚4动条滚动条滚动条滚动条滚动条滚动条滚动条5滚动条滚动条滚动条滚动条滚动条滚6动条滚动条滚动条滚动条滚动条滚动条7滚动条滚动条滚动条滚动条滚动条滚动条滚动条8滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条9滚动条滚动条滚动条滚动条滚动条10滚动条滚动条滚动条滚动条滚动条滚动条滚11动条滚动条滚动条滚动条滚动条滚动条滚动条滚12动条滚动条滚动条滚动条滚动条滚动条滚动条13滚动条滚动条滚动条滚动条滚动条滚动条滚14动条滚动条滚动条滚动条滚动条滚动条滚动条15滚动条滚动条滚动条滚动条滚动条滚动条滚动16条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条
+          end
+        </p>
+        <p>
+          start
+          滚动条滚动条滚动条滚动条1滚动条滚动条滚动条滚动条滚动条滚2动条滚动条滚动条滚动条滚动条滚动3条滚动条滚动条滚动条滚动条滚4动条滚动条滚动条滚动条滚动条滚动条滚动条5滚动条滚动条滚动条滚动条滚动条滚6动条滚动条滚动条滚动条滚动条滚动条7滚动条滚动条滚动条滚动条滚动条滚动条滚动条8滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条9滚动条滚动条滚动条滚动条滚动条10滚动条滚动条滚动条滚动条滚动条滚动条滚11动条滚动条滚动条滚动条滚动条滚动条滚动条滚12动条滚动条滚动条滚动条滚动条滚动条滚动条13滚动条滚动条滚动条滚动条滚动条滚动条滚14动条滚动条滚动条滚动条滚动条滚动条滚动条15滚动条滚动条滚动条滚动条滚动条滚动条滚动16条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条
+          end
+        </p>
+        <p>
+          start
+          滚动条滚动条滚动条滚动条1滚动条滚动条滚动条滚动条滚动条滚2动条滚动条滚动条滚动条滚动条滚动3条滚动条滚动条滚动条滚动条滚4动条滚动条滚动条滚动条滚动条滚动条滚动条5滚动条滚动条滚动条滚动条滚动条滚6动条滚动条滚动条滚动条滚动条滚动条7滚动条滚动条滚动条滚动条滚动条滚动条滚动条8滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条9滚动条滚动条滚动条滚动条滚动条10滚动条滚动条滚动条滚动条滚动条滚动条滚11动条滚动条滚动条滚动条滚动条滚动条滚动条滚12动条滚动条滚动条滚动条滚动条滚动条滚动条13滚动条滚动条滚动条滚动条滚动条滚动条滚14动条滚动条滚动条滚动条滚动条滚动条滚动条15滚动条滚动条滚动条滚动条滚动条滚动条滚动16条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条
+          end
+        </p>
+        <p>
+          start
+          滚动条滚动条滚动条滚动条1滚动条滚动条滚动条滚动条滚动条滚2动条滚动条滚动条滚动条滚动条滚动3条滚动条滚动条滚动条滚动条滚4动条滚动条滚动条滚动条滚动条滚动条滚动条5滚动条滚动条滚动条滚动条滚动条滚6动条滚动条滚动条滚动条滚动条滚动条7滚动条滚动条滚动条滚动条滚动条滚动条滚动条8滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条9滚动条滚动条滚动条滚动条滚动条10滚动条滚动条滚动条滚动条滚动条滚动条滚11动条滚动条滚动条滚动条滚动条滚动条滚动条滚12动条滚动条滚动条滚动条滚动条滚动条滚动条13滚动条滚动条滚动条滚动条滚动条滚动条滚14动条滚动条滚动条滚动条滚动条滚动条滚动条15滚动条滚动条滚动条滚动条滚动条滚动条滚动16条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条
+          end
+        </p>
+        <p>
+          start
+          滚动条滚动条滚动条滚动条1滚动条滚动条滚动条滚动条滚动条滚2动条滚动条滚动条滚动条滚动条滚动3条滚动条滚动条滚动条滚动条滚4动条滚动条滚动条滚动条滚动条滚动条滚动条5滚动条滚动条滚动条滚动条滚动条滚6动条滚动条滚动条滚动条滚动条滚动条7滚动条滚动条滚动条滚动条滚动条滚动条滚动条8滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条9滚动条滚动条滚动条滚动条滚动条10滚动条滚动条滚动条滚动条滚动条滚动条滚11动条滚动条滚动条滚动条滚动条滚动条滚动条滚12动条滚动条滚动条滚动条滚动条滚动条滚动条13滚动条滚动条滚动条滚动条滚动条滚动条滚14动条滚动条滚动条滚动条滚动条滚动条滚动条15滚动条滚动条滚动条滚动条滚动条滚动条滚动16条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条滚动条
+          end
+        </p>
+      </div>
+      <div id="scrollBar">
+        <p id="rollingBuoy"></p>
+      </div>
+      <div id="horizontalScrollBar">
+        <p id="horizontalRollingBuoy"></p>
+      </div>
+    </div>
+    <script>
+      let scrollContainer = document.getElementById("scrollContainer");
+      console.log("包裹滚动内容的外层容器", scrollContainer);
+      let content = document.getElementById("content");
+      let scrollBar = document.getElementById("scrollBar");
+      let rollingBuoy = document.getElementById("rollingBuoy");
+
+      let rollingBuoyHeight = 0; //滚动条高度
+      let sizeRollingDistance = 20; // 控制滚轮一次滚动的内容距离
+
+      window.onload = function () {
+        // 内容的可视区域 / 实际内容区域 = 滚动条浮标的高度 / 滚动条所能游动的区域
+        // clientHeight / scrollHeight = h / clientHeight // h表示滚动浮标的高度
+
+        // console.log('content.clientHeight',content.clientHeight)
+        // console.log('content.scrollHeight',content.scrollHeight)
+        // console.log('scrollBar.clientHeight',scrollBar.clientHeight)
+
+        // 滚动浮标的高度
+        rollingBuoyHeight =
+          (scrollContainer.clientHeight * scrollBar.clientHeight) /
+          scrollContainer.scrollHeight;
+        rollingBuoy.style.height = rollingBuoyHeight + "px";
+
+        // 实际内容区域可移动距离 / 实际内容区域 = 滚动条浮标可移动距离 / 滚动条所能游动的区域
+        // scrollTop / scrollHeight = top / clientHeight // top表示滚动浮标的移动距离
+
+        console.log("content.scrollTop", content.scrollTop);
+        console.log("scrollBar.clientHeight", scrollBar.clientHeight);
+        console.log(
+          "scrollContainer.scrollHeight",
+          scrollContainer.scrollHeight
+        );
+
+        const rollingBuoyDisplacementDistance =
+          (scrollContainer.scrollTop * scrollBar.clientHeight) /
+          scrollContainer.scrollHeight;
+        console.log("滚动浮标能滚动的距离", rollingBuoyDisplacementDistance);
+      };
+
+      //鼠标点击拖动部分
+      rollingBuoy.onmousedown = function (ev) {
+        console.log("鼠标点击位置信息", ev);
+        let e = ev || window.event;
+        if (e.preventDefault) {
+          e.preventDefault();
+        } else {
+          e.returnValue = false;
+        }
+
+        //鼠标点击位置距离拖动组件顶部的距离
+        let d_bkt = e.offsetY;
+        console.log("快速点击", e.offsetY);
+        console.log("scrollBar.offsetTop-----", rollingBuoy.offsetTop);
+        // 获取滚动容器顶部距离文档顶部的距离
+        let distanceFromTopDocument = e.clientY - d_bkt - rollingBuoy.offsetTop;
+        // console.log('滚动容器顶部距离文档顶部的距离',distanceFromTopDocument)
+        //鼠标拖动函数
+        document.onmousemove = function (ev) {
+          let e = ev || window.event;
+          console.log("快速点击----e.clientY", e.clientY);
+          console.log(
+            "快速点击----distanceFromTopDocument",
+            distanceFromTopDocument
+          );
+          console.log("快速点击----d_bkt", d_bkt);
+
+          let top = e.clientY - distanceFromTopDocument - d_bkt; // 已滚动距离 如果容器距离HTML元素顶部距离大于0 则要减去这部分距离
+          // console.log('clientY高度',e.clientY)
+          // console.log('距离滚动元素顶部距离',d_bkt)
+          console.log("快速点击----已滚动的top值", top);
+
+          if (top <= 0) {
+            // 未滚动
+            top = 0;
+            console.log("top值小于等于0");
+          } else if (top >= scrollBar.clientHeight - rollingBuoy.clientHeight) {
+            // 达到最大滚动距离时
+            top = scrollBar.clientHeight - rollingBuoy.clientHeight; // 获取到最大可滚动的高度
+            console.log("已达到最大滚动距离", top);
+          }
+
+          //根据已滚动的距离和剩余可滚动的距离 计算滚动比例
+          let scale = top / (scrollBar.clientHeight - rollingBuoy.clientHeight);
+
+          console.log("拖动的缩放", scale);
+          //滚动区域的滚动距离  计算公式// 实际内容区域应移动距离（x 需要计算出来） / 实际内容区域可滚动高度(content.clientHeight - scrollContainer.clientHeight) = 滚动条已滚动距离（top） / 滚动条可滚动的高度(scrollBar.clientHeight - rollingBuoy.clientHeight)
+
+          let cony =
+            scale * (content.clientHeight - scrollContainer.clientHeight);
+          console.log("应滚动距离", cony);
+          rollingBuoy.style.top = top + "px"; // 设置滚动条自身滚动距离
+          content.style.top = -cony + "px"; // 设置内容的滚动距离
+
+          console.log(top);
+        };
+
+        document.onmouseup = function () {
+          document.onmousemove = null;
+        };
+      };
+
+      //滚轮滚动时 非火狐浏览器
+      scrollContainer.onmousewheel = function (ev) {
+        let e = ev || window.event;
+        if (e.preventDefault) {
+          e.preventDefault();
+        } else {
+          e.returnValue = false;
+        }
+
+        if (e.wheelDelta > 0) {
+          //下滚 20表示一次滚动多少
+          let t = content.offsetTop + sizeRollingDistance;
+          console.log("t的值", t);
+          if (t >= 0) {
+            console.log(
+              "-----------------内容往下滚已到最顶部-----------------",
+              t
+            );
+            t = 0;
+          } else if (
+            t <= -(content.clientHeight - scrollContainer.clientHeight)
+          ) {
+            //不会触发该条件
+            t = -(content.clientHeight - scrollContainer.clientHeight);
+            // console.log('----------------------------------',t)
+          }
+
+          //设置滚动比例      当前滚动条滚动的距离 / 元素可滚动的距离
+
+          let scale = t / (content.clientHeight - scrollContainer.clientHeight);
+          console.log("滚动时缩放", scale);
+          let top = scale * (scrollBar.clientHeight - rollingBuoy.clientHeight);
+          console.log("向下滚动的top", top);
+          console.log("向下滚动的内容t", t);
+          content.style.top = t + "px";
+          rollingBuoy.style.top = -top + "px";
+        }
+        if (e.wheelDelta < 0) {
+          //上滚
+          let t = content.offsetTop - sizeRollingDistance;
+          if (t >= 0) {
+            t = 0;
+            console.log(
+              "--上滚------------------------------------------------",
+              t
+            );
+          } else if (
+            t <= -(content.clientHeight - scrollContainer.clientHeight)
+          ) {
+            // 滚动到最底部
+            t = -(content.clientHeight - scrollContainer.clientHeight);
+            console.log(
+              "-------------------------已滚动到最底部-------------------------",
+              t
+            );
+          }
+          //设置滚动比例      当前滚动条滚动的距离 / 元素可滚动的距离
+          let scale = t / (content.clientHeight - scrollContainer.clientHeight);
+
+          //设置滚动区域的滚动距离
+          let top = scale * (scrollBar.clientHeight - rollingBuoy.clientHeight);
+          content.style.top = t + "px";
+          rollingBuoy.style.top = -top + "px";
+        }
+      };
+
+      //以下为鼠标滚轮事件
+      // let str = window.navigator.userAgent.toLowerCase();
+
+      // if (str.indexOf("firefox") != -1) {
+      //   //火狐浏览器
+      //   scrollContainer.addEventListener(
+      //     "DOMMouseScroll",
+      //     function (e) {
+      //       e.preventDefault(); //阻止窗口默认的滚动事件
+      //       if (e.detail < 0) {
+      //         //下滚
+      //         let t = content.offsetTop + 20;
+      //         if (t >= 0) {
+      //           t = 0;
+      //         }
+      //         if (t <= -(content.clientHeight - scrollContainer.clientHeight)) {
+      //           t = -(content.clientHeight - scrollContainer.clientHeight);
+      //         }
+      //         //计算滚动条和滚动区域的滚动比例
+      //         let scale = t / (content.clientHeight - scrollContainer.clientHeight);
+      //         //滚动区域的滚动距离
+      //         let top = scale * (scrollBar.clientHeight - rollingBuoy.clientHeight);
+      //         content.style.top = t + "px";
+      //         rollingBuoy.style.top = -top + "px";
+      //       }
+      //       if (e.detail > 0) {
+      //         //上滚
+      //         let t = content.offsetTop - 20;
+      //         if (t >= 0) {
+      //           t = 0;
+      //         }
+      //         if (t <= -(content.clientHeight - scrollContainer.clientHeight)) {
+      //           t = -(content.clientHeight - scrollContainer.clientHeight);
+      //         }
+      //         let scale = t / (content.clientHeight - scrollContainer.clientHeight);
+      //         let top = scale * (scrollBar.clientHeight - rollingBuoy.clientHeight);
+      //         content.style.top = t + "px";
+      //         rollingBuoy.style.top = -top + "px";
+      //       }
+      //     },
+      //     false
+      //   );
+      // } else {
+      //     //非火狐浏览器
+      //     scrollContainer.onmousewheel = function (ev) {
+      //         let e = ev || window.event;
+      //         if (e.preventDefault) {
+      //             e.preventDefault();
+      //         } else {
+      //             e.returnValue = false;
+      //         }
+      //         if (e.wheelDelta > 0) {
+      //             //下滚
+      //             let t = content.offsetTop + 20;
+      //             if (t >= 0) {
+      //                 t = 0;
+      //             }
+      //             if (t <= -(content.clientHeight - scrollContainer.clientHeight)) {
+      //                 t = -(content.clientHeight - scrollContainer.clientHeight);
+      //             }
+      //             let scale = t / (content.clientHeight - scrollContainer.clientHeight);
+      //             let top = scale * (scrollBar.clientHeight - rollingBuoy.clientHeight);
+      //             content.style.top = t + "px";
+      //             rollingBuoy.style.top = -top + "px";
+      //         }
+      //         if (e.wheelDelta < 0) {
+      //             //上滚
+      //             let t = content.offsetTop - 20;
+      //             if (t >= 0) {
+      //                 t = 0;
+      //             }
+      //             if (t <= -(content.clientHeight - scrollContainer.clientHeight)) {
+      //                 t = -(content.clientHeight - scrollContainer.clientHeight);
+      //             }
+      //             //设置滚动比例
+      //             let scale = t / (content.clientHeight - scrollContainer.clientHeight);
+      //             //设置滚动区域的滚动距离
+      //             let top = scale * (scrollBar.clientHeight - rollingBuoy.clientHeight);
+      //             content.style.top = t + "px";
+      //             rollingBuoy.style.top = -top + "px";
+      //         }
+      //     };
+      // }
+    </script>
+  </body>
+</html>
